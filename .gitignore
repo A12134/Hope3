@@ -1,6 +1,6 @@
 # Prerequisites
 *.d
-*.2DGames/libs/
+2DGames\libs\*.*
 
 # Compiled Object files
 *.slo
@@ -34,3 +34,6 @@
 
 # Visual studio files
 *.vs/
+2DGames/libs/assimp-vc140-mt.exp
+2DGames/libs/assimp-vc140-mt.ilk
+2DGames/libs/assimp-vc140-mt.pdb
