@@ -22,6 +22,7 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
+	// TODO: release all assets and in-game data
 }
 
 Game * ResourceManager::createNewGame()

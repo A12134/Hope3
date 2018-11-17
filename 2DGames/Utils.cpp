@@ -2,6 +2,11 @@
 #include "includes/GLFW/glfw3.h"
 #include "includes/glad/glad.h"
 
+float Utils::OTSS = 0;
+float Utils::TSS = 0;
+
+glm::vec3 Utils::worldUpVector = glm::vec3(0.0f, 1.0f, 0.0f);
+MouseStatus Utils::mouseStatus;
 
 Utils::Utils()
 {
@@ -153,4 +158,30 @@ void Utils::setupMesh(Mesh * _mesh, std::vector<Vertex> vertices, std::vector<un
 std::vector<std::string> Utils::readTxtFile(std::string name)
 {
 	return std::vector<std::string>();
+}
+
+float Utils::getDeltaSecond()
+{
+	TSS = (float)glfwGetTime();
+	float retVal = TSS - OTSS;
+	OTSS = TSS;
+	return retVal;		// return delta second between each frame.
+}
+
+inline void Utils::getMousePosition_CallBack(GLFWwindow * window, double _mouseX, double _mouseY)
+{
+	mouseStatus.posX = _mouseX;
+	mouseStatus.posY = _mouseY;
+}
+
+inline void Utils::getMouseButton_CallBack(GLFWwindow * window, int button, int action, int mods)
+{
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
+		mouseStatus.button = E_MOUSE_BUTTON_STATUS::E_RIGHT_BUTTON_PRESSED;
+	else if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+		mouseStatus.button = E_MOUSE_BUTTON_STATUS::E_LEFT_BUTTON_PRESSED;
+	else if (button == GLFW_MOUSE_BUTTON_MIDDLE && action == GLFW_PRESS)
+		mouseStatus.button = E_MOUSE_BUTTON_STATUS::E_MIDDLE_BUTTON_PRESSED;
+	else
+		mouseStatus.button = E_MOUSE_BUTTON_STATUS::E_RELEASE;
 }

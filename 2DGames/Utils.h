@@ -16,6 +16,21 @@ struct Vertex
 	glm::vec2 mTexCoords;
 };
 
+struct MouseStatus 
+{
+	double posX;
+	double posY;
+	E_MOUSE_BUTTON_STATUS button;
+};
+
+enum E_MOUSE_BUTTON_STATUS 
+{
+	E_RELEASE,
+	E_LEFT_BUTTON_PRESSED,
+	E_RIGHT_BUTTON_PRESSED,
+	E_MIDDLE_BUTTON_PRESSED
+};
+
 // Texture wrapping enums
 enum WRAP_TAG
 {
@@ -40,6 +55,15 @@ public:
 	Utils();
 	~Utils();
 
+	// store the mouse information
+	static MouseStatus mouseStatus;
+
+	// get the mouse information
+	static inline MouseStatus getMouseStatus() { return mouseStatus; }
+
+	// world coordinate up vector
+	static glm::vec3 worldUpVector;
+
 	// Set the property of the texture
 	// @wt1, ft1: horizontal property
 	// @wt2, ft2: vertical property
@@ -61,6 +85,20 @@ public:
 	// @name: the name of the file
 	static std::vector<std::string> readTxtFile(std::string name);
 	
+	// calculate the time between each frame
+	// @return time
+	static float getDeltaSecond();
+
+	// mouse callback function
+	static inline void getMousePosition_CallBack(GLFWwindow* window, double _mouseX, double _mouseY);
+	
+
+	// mouse button callback function
+	static inline void getMouseButton_CallBack(GLFWwindow* window, int button, int action, int mods);
+
+private:
+	static float OTSS;
+	static float TSS;
 };
 #endif
 

@@ -16,6 +16,7 @@
 #include "Material.h"
 #include "Window.h"
 #include "Game.h"
+#include "Scene.h"
 
 class ResourceManager
 {
@@ -48,9 +49,18 @@ private:
 	// Materials -- combined textures, each material contains maximum 16 textures
 	static std::unordered_map<std::string, Material*> mMaterials;
 
+	// Scenes -- a place to store each scene
+	static std::unordered_map<std::string, Scene*> mScenes;
+
+	// Scene pointer
+	static Scene* currentScene;
+
 public:
 	ResourceManager();
 	~ResourceManager();
+
+	// Get the current scene
+	static inline Scene* getCurrentScene() { return currentScene; }
 
 	// Create a new Game event class
 	// @return: Game class pointer
@@ -58,7 +68,7 @@ public:
 
 	// Get the current Game event class pointer
 	// @return: Game Class pointer
-	static Game* getGameEvent();
+	static inline Game* getGameEvent();
 
 	// Store the game class pointer into resource manager
 	// @param: Game Class pointer
@@ -66,7 +76,7 @@ public:
 
 	// Get the current window pointer
 	// @return: window class pointer
-	static Window* getCurrentWindow() { return mainWindow; };
+	static inline Window* getCurrentWindow() { return mainWindow; };
 
 	// Store the current window pointer
 	static void setCurrentWindow(Window* _window);
@@ -79,27 +89,27 @@ public:
 
 	// Get the material files which contians a list of texture file name
 	// @name: the name of the assets
-	static Material* getMaterial(std::string name);
+	static inline Material* getMaterial(std::string name);
 
 	// Get the assets from hashmap, if does not exist load from the disk, if not exist on disk, load the default asset.
 	// @name: the name of the asset
-	static Texture* getTexture(std::string name);
+	static inline Texture* getTexture(std::string name);
 
 	// Get the assets from hashmap, if does not exist load from the disk, if not exist on disk, load the default asset.
 	// @name: the name of the asset
-	static Mesh getMesh(std::string name);
+	static inline Mesh getMesh(std::string name);
 
 	// Get the assets from hashmap, if does not exist load from the disk, if not exist on disk, load the default asset.
 	// @name: the name of the asset
-	static Audio getAudio(std::string name);
+	static inline Audio getAudio(std::string name);
 
 	// Get the assets from hashmap, if does not exist load from the disk, if not exist on disk, load the default asset.
 	// @name: the name of the asset
-	static Flipbook getFlipbook(std::string name);
+	static inline Flipbook getFlipbook(std::string name);
 
 	// Get the assets from hashmap, if does not exist load from the disk, if not exist on disk, load the default asset.
 	// @name: the name of the asset
-	static Model getModel(std::string name);
+	static inline Model getModel(std::string name);
 
 	// Unload the assets by name
 	// @name: asset's name

@@ -17,13 +17,12 @@ class Game
 public:
 	// Game state
 	GameState	State;
-	GLuint		Width, Height;
+	
 
 	
 public:
 	// Constructor/Destructor
 	Game();
-	Game(GLuint width, GLuint height);
 	~Game();
 
 	// Initialize game state(load all shaders/textures/levels)

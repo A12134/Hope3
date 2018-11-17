@@ -32,5 +32,26 @@ void main()
 	mainWindow->enableDepthTest();
 	mainWindow->enableMSAA();
 
+	Game* mainGameEvent = ResourceManager::createNewGame();
+	
+	// main loop
 
+	while (!glfwWindowShouldClose(mainWindow->getWindow()))
+	{
+		mainWindow->clearColor(0.8f, 0.8f, 0.8f, 1.0f);
+		mainWindow->clearBuffers();
+
+		GLfloat deltaSeconds = Utils::getDeltaSecond();
+
+		mainGameEvent->ProcessInput(deltaSeconds);
+		mainGameEvent->Update(deltaSeconds);
+		mainGameEvent->Render();
+
+		mainWindow->swapBuffer();
+		glfwPollEvents();
+	}
+
+	LogManager::addLog(ELogType::E_EVENT, "Engine shutdown");
+
+	// TODO: release all memory;
 }
