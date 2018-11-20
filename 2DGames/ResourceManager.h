@@ -17,6 +17,8 @@
 #include "Window.h"
 #include "Game.h"
 #include "Scene.h"
+#include "Sprite.h"
+#include "TileMap.h"
 
 class ResourceManager
 {
@@ -55,9 +57,23 @@ private:
 	// Scene pointer
 	static Scene* currentScene;
 
+	// Sprites
+	static std::unordered_map<std::string, Sprite*> mSprites;
+
+	// tileMap
+	static std::unordered_map<std::string, TileMap*> mTileMaps;
+
 public:
 	ResourceManager();
 	~ResourceManager();
+
+	static void addTileMap(std::string name, TileMap* map);
+
+	static TileMap* getTileMap(std::string name);
+
+	static void addSprite(std::string name, Sprite* sprite);
+
+	static Sprite* getSprite(std::string name);
 
 	// Get the current scene
 	static inline Scene* getCurrentScene() { return currentScene; }

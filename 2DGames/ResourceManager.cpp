@@ -7,6 +7,7 @@
 #include "includes/glad/glad.h"
 #include "Utils.h"
 
+Scene* ResourceManager::currentScene = nullptr;
 Game* ResourceManager::mainGameEvent = nullptr;
 Window* ResourceManager::mainWindow = nullptr;
 ShaderManager* ResourceManager::mShaderManager = new ShaderManager();
@@ -15,6 +16,8 @@ std::unordered_map<std::string, Mesh*> ResourceManager::mMeshes;
 std::unordered_map<std::string, Audio*> ResourceManager::mAudios;
 std::unordered_map<std::string, Flipbook*> ResourceManager::mFlipbooks;
 std::unordered_map<std::string, Model*> ResourceManager::mModels;
+std::unordered_map<std::string, TileMap*> ResourceManager::mTileMaps;
+std::unordered_map<std::string, Sprite*> ResourceManager::mSprites;
 
 ResourceManager::ResourceManager()
 {
@@ -23,6 +26,53 @@ ResourceManager::ResourceManager()
 ResourceManager::~ResourceManager()
 {
 	// TODO: release all assets and in-game data
+}
+
+void ResourceManager::addTileMap(std::string name, TileMap* map)
+{
+	if (mTileMaps[name])
+		LogManager::addLog(ELogType::E_WARNING, "Tile map " + name + " already created.");
+	else
+		mTileMaps[name] = map;
+}
+
+TileMap * ResourceManager::getTileMap(std::string name)
+{
+	if (mTileMaps[name]) 
+	{
+		return mTileMaps[name];
+	}
+	else
+	{
+		LogManager::addLog(ELogType::E_WARNING, "Tile map " + name + " does not exist.");
+		return new TileMap();
+	}
+}
+
+void ResourceManager::addSprite(std::string name, Sprite* sprite)
+{
+	if(mSprites[name])
+	{
+		LogManager::addLog(ELogType::E_WARNING, "Sprite " + name + " already exist.");
+	}
+	else 
+	{
+		mSprites[name] = sprite;
+	}
+}
+
+inline Sprite * ResourceManager::getSprite(std::string name)
+{
+	if (mSprites[name]) 
+	{
+		return mSprites[name];
+	}
+	else 
+	{
+		LogManager::addLog(ELogType::E_WARNING, "Sprite " + name + " does not exist.");
+		return new Sprite();
+	}
+	return nullptr;
 }
 
 Game * ResourceManager::createNewGame()

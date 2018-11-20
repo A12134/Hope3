@@ -44,6 +44,7 @@ private:
 	Mesh* sprite;
 
 public:
+	Sprite() {};
 	// default constructor, a square with size 1.0f and 1.0f
 	Sprite(std::string name, Material* _mat, UV uv);
 	Sprite(std::string name, Material* _mat, float sizeX, float sizeY, UV uv);

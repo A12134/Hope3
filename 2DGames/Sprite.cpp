@@ -12,6 +12,8 @@ Sprite::Sprite(std::string _name, Material* _mat, UV uv)
 	sprite = new Mesh(_name + "_mesh");
 	// setup the sprite mesh
 	setupMesh();
+
+
 }
 
 Sprite::Sprite(std::string _name, Material* _mat, float sizeX, float sizeY, UV uv)
