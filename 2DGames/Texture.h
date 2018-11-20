@@ -17,6 +17,8 @@ private:
 	// Texture location and name -- don't know if I ever need this, just put it here in case
 	std::string name;
 
+	float width, height;
+
 public:
 	
 	Texture(std::string name);
@@ -34,6 +36,13 @@ public:
 	void setName(std::string name) { this->name = name; }
 
 	std::string getName() { return this->name; }
+
+	void setWidthHeight(float _width, float _height) { this->width = _width; this->height = _height; }
+
+	float getWidth() { return this->width; }
+
+	float getHeight() { return this->height; }
+
 };
 
 #endif

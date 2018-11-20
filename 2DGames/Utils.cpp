@@ -1,6 +1,8 @@
 #include "Utils.h"
 #include "includes/GLFW/glfw3.h"
 #include "includes/glad/glad.h"
+#include <fstream>
+#include <sstream>
 
 float Utils::OTSS = 0;
 float Utils::TSS = 0;
@@ -157,7 +159,28 @@ void Utils::setupMesh(Mesh * _mesh, std::vector<Vertex> vertices, std::vector<un
 
 std::vector<std::string> Utils::readTxtFile(std::string name)
 {
-	return std::vector<std::string>();
+	std::ifstream infile(name);
+	std::string line;
+	std::vector<std::string> retVal;
+
+	while (std::getline(infile, line)) 
+	{
+		std::stringstream ss(line);
+		std::string i;
+
+		while (ss >> i) 
+		{
+			retVal.push_back(i);
+
+			if (ss.peek() == ',' || ss.peek() == ' ') 
+			{
+				ss.ignore();
+			}
+		}
+
+		retVal.push_back("/n");
+	}
+	return retVal;
 }
 
 float Utils::getDeltaSecond()

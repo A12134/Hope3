@@ -17,6 +17,11 @@ public:
 	void addNewTexture(Texture* texture);
 
 	void useThisMaterial();
+
+	// get the width of texture_0
+	float getTexWidth() { return this->mTextures.at(0)->getWidth(); }
+	// get the height of texture_0
+	float getTexHeight() { return this->mTextures.at(0)->getHeight(); }
 };
 
 #endif
